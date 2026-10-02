@@ -51,6 +51,13 @@ describe("HomePage", () => {
     expect(screen.queryByRole("img", { name: /Grafik/ })).not.toBeInTheDocument();
   });
 
+  it("tanpa grafik bila data statistik kosong", async () => {
+    api.fetchLostFoundStatsDaily.mockResolvedValue({ status: "success", data: { stats_losts: {}, stats_founds: {} } });
+    renderWithProviders(<HomePage />);
+    await screen.findByRole("link", { name: "Dompet" });
+    expect(screen.queryByRole("img", { name: /Grafik/ })).not.toBeInTheDocument();
+  });
+
   it("memfilter berdasarkan jenis, status selesai, dan kata kunci", async () => {
     renderWithProviders(<HomePage />);
     await screen.findByRole("link", { name: "Dompet" });

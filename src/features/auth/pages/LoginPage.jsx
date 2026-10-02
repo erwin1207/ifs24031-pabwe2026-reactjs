@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { IconEye, IconEyeOff } from "@tabler/icons-react";
 import FormField from "../../../components/FormField";
 import useInput from "../../../hooks/useInput";
 import useDocumentTitle from "../../../hooks/useDocumentTitle";
@@ -38,6 +37,7 @@ export default function LoginPage() {
       <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-5">
         <FormField
           id="email"
+          name="email"
           label="Email"
           type="email"
           autoComplete="email"
@@ -49,6 +49,7 @@ export default function LoginPage() {
         <div>
           <FormField
             id="password"
+            name="password"
             label="Kata sandi"
             type={showPassword ? "text" : "password"}
             autoComplete="current-password"
@@ -57,15 +58,14 @@ export default function LoginPage() {
             onChange={onPasswordChange}
             error={errors.password}
           />
-          <button
-            type="button"
-            onClick={() => setShowPassword((value) => !value)}
-            aria-pressed={showPassword}
-            className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-700 hover:underline"
-          >
-            {showPassword ? <IconEyeOff size={18} aria-hidden="true" /> : <IconEye size={18} aria-hidden="true" />}
+          <label className="mt-2 flex items-center gap-2 text-sm font-semibold text-indigo-800">
+            <input
+              type="checkbox"
+              checked={showPassword}
+              onChange={(event) => setShowPassword(event.target.checked)}
+            />
             Tampilkan kata sandi
-          </button>
+          </label>
         </div>
         <button type="submit" disabled={loading} className={`${btnPrimary} w-full`}>
           {loading ? "Memproses..." : "Masuk"}

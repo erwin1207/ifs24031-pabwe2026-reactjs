@@ -40,6 +40,7 @@ export default function RegisterPage() {
       <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-5">
         <FormField
           id="name"
+          name="name"
           label="Nama lengkap"
           autoComplete="name"
           placeholder="Nama Anda"
@@ -49,6 +50,7 @@ export default function RegisterPage() {
         />
         <FormField
           id="email"
+          name="email"
           label="Email"
           type="email"
           autoComplete="email"
@@ -59,6 +61,7 @@ export default function RegisterPage() {
         />
         <FormField
           id="password"
+          name="password"
           label="Kata sandi"
           type="password"
           autoComplete="new-password"

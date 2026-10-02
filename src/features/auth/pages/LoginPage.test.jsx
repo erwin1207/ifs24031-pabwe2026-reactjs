@@ -32,16 +32,24 @@ describe("LoginPage", () => {
     expect(postLogin).not.toHaveBeenCalled();
   });
 
-  it("mengubah visibilitas kata sandi", async () => {
+  it("mengubah visibilitas kata sandi lewat checkbox", async () => {
     renderWithProviders(<LoginPage />);
     const password = screen.getByLabelText("Kata sandi");
     expect(password).toHaveAttribute("type", "password");
-    const toggle = screen.getByRole("button", { name: "Tampilkan kata sandi" });
+    const toggle = screen.getByLabelText("Tampilkan kata sandi");
     await userEvent.click(toggle);
     expect(password).toHaveAttribute("type", "text");
-    expect(toggle).toHaveAttribute("aria-pressed", "true");
     await userEvent.click(toggle);
     expect(password).toHaveAttribute("type", "password");
+  });
+
+  it("tombol submit adalah satu-satunya tombol di dalam form", () => {
+    const { container } = renderWithProviders(<LoginPage />);
+    const buttons = container.querySelectorAll("form button");
+    expect(buttons).toHaveLength(1);
+    expect(buttons[0]).toHaveAttribute("type", "submit");
+    expect(container.querySelector("input[name='email']")).toBeInTheDocument();
+    expect(container.querySelector("input[name='password']")).toBeInTheDocument();
   });
 
   it("login berhasil memperbarui state", async () => {

@@ -127,7 +127,7 @@ export default function HomePage() {
         <MetricCard label="Selesai" value={metrics.completed} />
       </section>
 
-      {stats && <StatsChart stats={stats} />}
+      {stats && Object.keys(stats.stats_losts).length > 0 && <StatsChart stats={stats} />}
 
       <section aria-label="Filter laporan" className="space-y-4 rounded-2xl border border-slate-200 bg-white p-4">
         <div className="relative">
